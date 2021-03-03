@@ -38,19 +38,19 @@ function ListMembersAdapter(props: ListMembersProps) {
 
   // logic
 
-  function goToProfile() {
-    NavigationService.navigate(ProfileScreen, {
-      user: userInfo.user,
-    });
-  }
+  // function goToProfile() {
+  //   NavigationService.navigate(ProfileScreen, {
+  //     user: userInfo.user,
+  //   });
+  // }
 
-  function goToSearch() {
-    NavigationService.navigate(SearchScreen);
-  }
+  // function goToSearch() {
+  //   NavigationService.navigate(SearchScreen);
+  // }
 
-  function goToNewMess() {
-    NavigationService.navigate(NewMessageScreen);
-  }
+  // function goToNewMess() {
+  //   NavigationService.navigate(NewMessageScreen);
+  // }
 
   function onRefresh() {
     page = 1;
@@ -116,11 +116,11 @@ function ListMembersAdapter(props: ListMembersProps) {
     setDataSearchUser(dataSearchUser.concat(res));
   }
 
-  function goToChatDetail(item: User2) {
-    NavigationService.navigate(ChatDetailScreen, {
-      chatInfo: { data: item, type: TypeParam.FROM_USER },
-    });
-  }
+  // function goToChatDetail(item: User2) {
+  //   NavigationService.navigate(ChatDetailScreen, {
+  //     chatInfo: { data: item, type: TypeParam.FROM_USER },
+  //   });
+  // }
 
   return {
     page,
@@ -128,15 +128,15 @@ function ListMembersAdapter(props: ListMembersProps) {
     dataSearchUser,
     loading,
     txt,
-    goToProfile,
-    goToSearch,
-    goToNewMess,
+    // goToProfile,
+    // goToSearch,
+    // goToNewMess,
     onRefresh,
     onEndReached,
     setTxtSearch,
     searchUser,
     searchUserSuccess,
-    goToChatDetail,
+    // goToChatDetail,
   };
 }
 

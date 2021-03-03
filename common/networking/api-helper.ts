@@ -1,26 +1,27 @@
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-unused-vars
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { APP_CONFIGS } from '../app-config';
 // import { showAlert, TYPE } from 'libraries/dropdown-alert';
 // import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
 // import { Alert } from 'react-native';
-import env from 'react-native-config';
+// import env from 'react-native-config';
 // import { translate } from 'res/languages';
 // import AsyncStorageHelpers, { StorageKey } from '../../../helpers/async-storage-helpers';
-import { LoginMobileResponse } from '../../../features/login-old/view/components/login-form-wv/login-form-wv.props';
-import { SUCCESS, TOKEN_EXPIRED } from './status';
+// import { LoginMobileResponse } from '../../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { SUCCESS } from './status';
 
-const BASE_API =
-  process.env.REACT_APP_IP_ADDRESS_API === undefined
-    ? env.REACT_APP_IP_ADDRESS_API
-    : process.env.REACT_APP_IP_ADDRESS_API;
-const BASE_PORT =
-  process.env.REACT_APP_IP_ADDRESS_PORT === undefined
-    ? env.REACT_APP_IP_ADDRESS_PORT
-    : process.env.REACT_APP_IP_ADDRESS_PORT;
+// const BASE_API =
+//   process.env.REACT_APP_IP_ADDRESS_API === undefined
+//     ? env.REACT_APP_IP_ADDRESS_API
+//     : process.env.REACT_APP_IP_ADDRESS_API;
+// const BASE_PORT =
+//   process.env.REACT_APP_IP_ADDRESS_PORT === undefined
+//     ? env.REACT_APP_IP_ADDRESS_PORT
+//     : process.env.REACT_APP_IP_ADDRESS_PORT;
 
 const instance = axios.create({
-  baseURL: `http://${BASE_API}:${BASE_PORT}`,
+  baseURL: APP_CONFIGS.URL_API,
   // baseURL: url,
   timeout: 20 * 1000,
 });

@@ -8,6 +8,7 @@ import { PushStreamTypes } from './types/push-stream-types';
 import { User } from './types/user';
 // import { ApiService } from '../service/ApiService';
 import { HyperUtils } from './hyper-utils';
+import { APP_CONFIGS } from './app-config';
 
 var sockets: ReconnectingWebSocket[] = [];
 var socket: ReconnectingWebSocket;
@@ -31,16 +32,15 @@ const pushStreamService = {
 
   subChat: (userID: string) => {
     socket = new ReconnectingWebSocket(
-      `ws://${env.REACT_APP_PUSH_STREAM_IP}:${env.REACT_APP_PUSH_STREAM_PORT}/ws?Channels=` +
-        userID,
+      `ws://${APP_CONFIGS.URL_PUSH_STREAM}/ws?Channels=` + userID,
       [],
       options
     );
     socket.onopen = () => {
       // connection opened
-      console.log('test_Connected');
+      console.log('');
       console.log(
-        `test_ws://${env.REACT_APP_PUSH_STREAM_IP}:${env.REACT_APP_PUSH_STREAM_PORT}/ws?Channels=` +
+        `test_ws://${APP_CONFIGS.URL_PUSH_STREAM}/ws?Channels=` +
           userID
       );
     };

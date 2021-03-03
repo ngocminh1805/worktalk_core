@@ -1,5 +1,5 @@
 import LoginOldServices from 'features/login-old/model-login-old/login-old.services';
-import { LoginMobileResponse } from 'features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { LoginMobileResponse } from '../../types/login';
 import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
 import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
 import { call, put } from 'redux-saga/effects';

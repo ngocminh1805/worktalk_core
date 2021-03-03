@@ -2,7 +2,7 @@ import { LOGIN_MOBILE, UPDATE_USER, REMOVE_USER } from './index';
 import {
   LoginMobileResponse,
   LoginMobileRequest,
-} from '/features/login-old/view/components/login-form-wv/login-form-wv.props';
+} from '../../types/login';
 
 export const loginMobileAction = (data: LoginMobileRequest) => {
   return {

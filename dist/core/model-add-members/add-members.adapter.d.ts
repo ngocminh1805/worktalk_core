@@ -1,0 +1,24 @@
+import { itemDataCheck } from '../common/types/item-data';
+import { User2 } from 'core/common/types/user';
+import { AddMembersProps } from './add-members.props';
+declare function AddMembersAdapter(props: AddMembersProps): {
+    page: number;
+    ITEM_PAGE: number;
+    dataSearchUser: any[];
+    loading: boolean;
+    txt: string;
+    dataUserCheck: itemDataCheck[];
+    emptyNameGr: boolean;
+    nameGr: string;
+    onRefresh: () => void;
+    onEndReached: () => void;
+    setTxtSearch: (txt: string) => void;
+    searchUserSuccess: (res: User2[]) => void;
+    searchUser: () => void;
+    setSateDataCheck: (data: itemDataCheck[]) => void;
+    addToDataCheck: (item: itemDataCheck) => void;
+    removeUserCheck: (item: itemDataCheck) => void;
+    onChangeText: (txt: string) => void;
+    createGrSuccess: (res: any) => void;
+};
+export default AddMembersAdapter;

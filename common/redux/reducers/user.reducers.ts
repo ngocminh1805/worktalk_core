@@ -1,4 +1,4 @@
-import { LoginMobileResponse } from '../../../../features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { LoginMobileResponse } from '../../types/login';
 import { UPDATE_USER, REMOVE_USER } from '../actions/index';
 
 interface UserState {

@@ -3,19 +3,14 @@
 */
 
 // import { showLoading, hideLoading } from 'libraries/loading/loading-modal';
-import { processRequestRespository } from '../common/networking/api-helper';
-// import { itemDataCheck } from 'features/create-group/view/components/search-list-user/item-list-user/item-list-user.component';
-import { User2 } from '../common/types/user';
-// import AddMembersContainer from '../../features/add-members/view/add-members.screen';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import { itemDataCheck } from '../common/types/item-data';
+import { User2 } from 'core/common/types/user';
+// import {AddMembersContainer} from '../../features/add-members/view/add-members.screen';
 import AddMembersServices from './add-members.services';
 import { useState } from 'react';
 import { AddMembersProps } from './add-members.props';
-import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
-
-interface itemDataCheck {
-  item: User2;
-  check: boolean;
-}
+// import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation';
 
 function AddMembersAdapter(props: AddMembersProps) {
   // AddMembersContainer: AddMembersContainer;
@@ -27,7 +22,7 @@ function AddMembersAdapter(props: AddMembersProps) {
 
   var page: number = 1;
   const ITEM_PAGE = 15;
-  const navigation: NavigationScreenProp<NavigationState, NavigationParams> = props.navigation;
+  // const navigation: NavigationScreenProp<NavigationState, NavigationParams> = props.navigation;
 
   // States
 
@@ -166,30 +161,30 @@ function AddMembersAdapter(props: AddMembersProps) {
     setDataUserCheck([...newData]);
   }
 
-  function onCreateGr() {
-    let listIdUser: string[] = [];
-    // const data = this.AddMembersContainer.state.dataUserCheck;
-    const data = dataUserCheck;
-    if (data && data.length > 0) {
-      data.map((e: itemDataCheck) => {
-        const id = e && e.item && e.item.id;
-        listIdUser.push(id);
-      });
-      const chatId = navigation.getParam('chatId');
-      if (!chatId) {
-        return;
-      }
-      const dataPost = {
-        chatId: chatId,
-        members: listIdUser,
-      };
-      // showLoading();
-      processRequestRespository(
-        AddMembersServices.getInstance().addMembers(dataPost),
-        createGrSuccess
-      );
-    }
-  }
+  // function onCreateGr() {
+  //   let listIdUser: string[] = [];
+  //   // const data = this.AddMembersContainer.state.dataUserCheck;
+  //   const data = dataUserCheck;
+  //   if (data && data.length > 0) {
+  //     data.map((e: itemDataCheck) => {
+  //       const id = e && e.item && e.item.id;
+  //       listIdUser.push(id);
+  //     });
+  //     const chatId = navigation.getParam('chatId');
+  //     if (!chatId) {
+  //       return;
+  //     }
+  //     const dataPost = {
+  //       chatId: chatId,
+  //       members: listIdUser,
+  //     };
+  //     // showLoading();
+  //     processRequestRespository(
+  //       AddMembersServices.getInstance().addMembers(dataPost),
+  //       createGrSuccess
+  //     );
+  //   }
+  // }
 
   function onChangeText(txt: string) {
     if (txt) {
@@ -232,10 +227,10 @@ function AddMembersAdapter(props: AddMembersProps) {
     setSateDataCheck,
     addToDataCheck,
     removeUserCheck,
-    onCreateGr,
+    // onCreateGr,
     onChangeText,
     createGrSuccess,
   };
 }
 
-export default AddMembersAdapter
+export default AddMembersAdapter;

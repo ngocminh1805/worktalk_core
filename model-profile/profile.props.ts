@@ -2,7 +2,7 @@
     Created by longdq
 */
 
-import { LoginMobileResponse } from 'features/login-old/view/components/login-form-wv/login-form-wv.props';
+import { LoginMobileResponse } from '../common/types/login';
 import { NavigationScreenProp, NavigationState, NavigationParams } from 'react-navigation';
 
 export interface ProfileProps {

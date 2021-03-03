@@ -4,59 +4,84 @@
 
 import { processRequestRespository } from 'core/common/networking/api-helper';
 // import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
-import { User } from 'core/common/types/user';
-import NewMessageContainer from '../../features/new-message/view/new-message.screen';
+import { User, User2 } from 'core/common/types/user';
+import { useState } from 'react';
+// import NewMessageContainer from '../../features/new-message/view/new-message.screen';
+import { NewMessageProps } from './new-message.props';
 import NewMessageServices from './new-message.services';
 
-export class NewMessageAdapter {
-  NewMessageContainer: NewMessageContainer;
-  constructor(container: NewMessageContainer) {
-    this.NewMessageContainer = container;
+function NewMessageAdapter(props: NewMessageProps) {
+  // NewMessageContainer: NewMessageContainer;
+  // constructor(container: NewMessageContainer) {
+  //   this.NewMessageContainer = container;
+  // }
+
+  // Variables
+
+  var page: number = 1;
+  const ITEM_PAGE = 15;
+
+  // States
+
+  const [dataSearchUser, setDataSearchUser] = useState<User2[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [txt, setTxt] = useState('');
+
+  // logic
+
+  function onRefresh() {
+    // this.NewMessageContainer.page = 1;
+    // this.NewMessageContainer.setState({
+    //   dataSearchUser: [],
+    // });
+    // this.searchUser();
+    (page = 1), setDataSearchUser([]);
   }
 
-  onRefresh = () => {
-    this.NewMessageContainer.page = 1;
-    this.NewMessageContainer.setState({
-      dataSearchUser: [],
-    });
-    this.searchUser();
-  };
-
-  onEndReached = () => {
+  function onEndReached() {
     console.log('test_onEndReached');
-    const { dataSearchUser } = this.NewMessageContainer.state;
-    const { loading } = this.NewMessageContainer.state;
-    let { page, ITEM_PAGE } = this.NewMessageContainer;
+    // const { dataSearchUser } = this.NewMessageContainer.state;
+    // const { loading } = this.NewMessageContainer.state;
+    // let { page, ITEM_PAGE } = this.NewMessageContainer;
+    // if (loading || dataSearchUser.length < page * ITEM_PAGE) return;
+    // this.NewMessageContainer.page += 1;
+    // this.searchUser();
     if (loading || dataSearchUser.length < page * ITEM_PAGE) return;
-    this.NewMessageContainer.page += 1;
-    this.searchUser();
+    page += 1;
+    searchUser();
     //Call url with new page
-  };
+  }
 
-  searchUser = () => {
-    const text = this.NewMessageContainer.state.txt;
-    const { page, ITEM_PAGE } = this.NewMessageContainer;
+  function searchUser() {
+    // const text = this.NewMessageContainer.state.txt;
+    const text = txt;
+    // const { page, ITEM_PAGE } = this.NewMessageContainer;
     // showLoading();
-    this.NewMessageContainer.setState({
-      loading: true,
-    });
+    // this.NewMessageContainer.setState({
+    //   loading: true,
+    // });
+    setLoading(true);
     processRequestRespository(
       NewMessageServices.getInstance().searchUser(text, ITEM_PAGE, page),
-      this.searchUserSuccess
+      // this.searchUserSuccess
+      searchUserSuccess
     );
-  };
+  }
 
-  setTxtSearch = (txt: string) => {
-    this.NewMessageContainer.setState(
-      {
-        txt: txt,
-        dataSearchUser: [],
-      },
-      () => {
-        this.searchUser();
-      }
-    );
-  };
+  function setTxtSearch(txt: string) {
+    // this.NewMessageContainer.setState(
+    //   {
+    //     txt: txt,
+    //     dataSearchUser: [],
+    //   },
+    //   () => {
+    //     this.searchUser();
+    //   }
+    // );
+    setTxt(txt);
+    setDataSearchUser([]);
+    searchUser();
+  }
 
   // searchUser = (text: string) => {
   //   showLoading();
@@ -66,13 +91,30 @@ export class NewMessageAdapter {
   //     this.searchUserSuccess
   //   );
   // };
-  searchUserSuccess = (res: User[]) => {
-    this.NewMessageContainer.setState({
-      loading: false,
-    });
+  function searchUserSuccess(res: User2[]) {
+    // this.NewMessageContainer.setState({
+    //   loading: false,
+    // });
+    setLoading(false);
     // hideLoading();
-    this.NewMessageContainer.setState({
-      dataSearchUser: [...this.NewMessageContainer.state.dataSearchUser, ...res],
-    });
+    // this.NewMessageContainer.setState({
+    //   dataSearchUser: [...this.NewMessageContainer.state.dataSearchUser, ...res],
+    // });
+    setDataSearchUser([...dataSearchUser, ...res]);
+  }
+
+  return {
+    page,
+    ITEM_PAGE,
+    dataSearchUser,
+    loading,
+    txt,
+    onRefresh,
+    searchUserSuccess,
+    setTxtSearch,
+    onEndReached,
+    searchUser,
   };
 }
+
+export default NewMessageAdapter

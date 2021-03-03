@@ -9,7 +9,7 @@ import { EventBusName, EventBusType } from 'core/common/event-bus';
 // import ListUserChatContainer from '../../features/list-user-chat/view/list-user-chat.screen';
 // import { ListChatModel } from './list-user-chat.props';
 // import ListUserChatServices from './list-user-chat.services';
-import EventBus from '../common/event-bus';
+import EventBus from 'core/common/event-bus';
 import { Subscription } from 'rxjs';
 
 // export class ListUserChatAdapter {
@@ -87,15 +87,17 @@ import { Subscription } from 'rxjs';
 //   };
 // }
 
-import { processRequestRespository } from '../common/networking/api-helper';
-// import { pushStreamService } from 'core/common/push-stream-service';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import { pushStreamService } from 'core/common/push-stream-service';
 import { useEffect, useState } from 'react';
-import { User } from '../common/types/user';
+import { User } from 'core/common/types/user';
 import { ListChatModel, ListUserChatProps } from './list-user-chat.props';
 import ListUserChatServices from './list-user-chat.services';
 import { IMessage } from 'react-native-gifted-chat';
-import { INewUserChat } from '../common/types/message';
-
+import { INewUserChat } from 'core/common/types/message';
+// import AsyncStorageHelpers, { StorageKey } from 'helpers/async-storage-helpers';
+// import NavigationService from 'routers/navigation-service';
+// import { IncomingCallScreen } from 'routers/screen-name';
 
 function ListUserChatAdapter(props: ListUserChatProps) {
   const { userInfo } = props;
@@ -113,7 +115,7 @@ function ListUserChatAdapter(props: ListUserChatProps) {
   //Callback
   useEffect(() => {
     registerSubscriber;
-    // pushStreamService.subChat(this.ListUserChatContainer.props.userInfo?.user?.id);
+    pushStreamService.subChat(userInfo?.user?.id);
     processRequestRespository(ListUserChatServices.getInstance().getListUser(), getListUserSuccess);
     getListChat();
     // getInfoVideoCall();

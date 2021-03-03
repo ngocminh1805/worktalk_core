@@ -2,21 +2,14 @@
     Created by longdq 
 */
 
-import { processRequestRespository } from '../common/networking/api-helper';
-import EventBus, { EventBusName } from '../common/event-bus';
-// import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
-// import NavigationService from 'routers/navigation-service';
-import { User, User2 } from '../common/types/user';
-// import { itemDataCheck } from '../../features/create-group/view/components/search-list-user/item-list-user/item-list-user.component';
+import { processRequestRespository } from 'core/common/networking/api-helper';
+import { hideLoading, showLoading } from 'libraries/loading/loading-modal';
+import { User2 } from 'core/common/types/user';
+import { itemDataCheck } from '../common/types/item-data';
 // import CreateGroupContainer from '../../features/create-group/view/create-group.screen';
 import CreateGroupServices from './create-group.services';
 import { CreateGroupProps } from './create-group.props';
 import { useState } from 'react';
-
-interface itemDataCheck {
-  item: User2;
-  check: boolean;
-}
 
 function CreateGroupAdapter(props: CreateGroupProps) {
   // CreateGroupContainer: CreateGroupContainer;
@@ -81,7 +74,7 @@ function CreateGroupAdapter(props: CreateGroupProps) {
   function searchUser() {
     // const text = this.CreateGroupContainer.state.txt;
     // const { page, ITEM_PAGE } = this.CreateGroupContainer;
-    // showLoading();
+    showLoading();
     // this.CreateGroupContainer.setState({
     //   loading: true,
     // });
@@ -96,7 +89,7 @@ function CreateGroupAdapter(props: CreateGroupProps) {
     //   loading: false,
     // });
     setLoading(false);
-    // hideLoading();
+    hideLoading();
     // this.CreateGroupContainer.setState({
     //   dataSearchUser: [...this.CreateGroupContainer.state.dataSearchUser, ...res],
     // });
@@ -164,34 +157,34 @@ function CreateGroupAdapter(props: CreateGroupProps) {
     setDataUserCheck([...newData]);
   }
 
-  function onCreateGr() {
-    let listIdUser: string[] = [];
-    // const data = this.CreateGroupContainer.state.dataUserCheck;
-    const data = dataUserCheck;
-    if (data && data.length > 0) {
-      data.map((e: itemDataCheck) => {
-        const id = e && e.item && e.item.id;
-        listIdUser.push(id);
-      });
-      // const nameGr = this.CreateGroupContainer.state.nameGr;
-      if (!nameGr) {
-        // this.CreateGroupContainer.setState({
-        //   emptyNameGr: true,
-        // });
-        setEmptyNameGr(true);
-        return;
-      }
-      const dataPost = {
-        title: nameGr,
-        members: listIdUser,
-      };
-      // showLoading();
-      processRequestRespository(
-        CreateGroupServices.getInstance().onCreateGr(dataPost),
-        // createGrSuccess
-      );
-    }
-  }
+  // function onCreateGr() {
+  //   let listIdUser: string[] = [];
+  //   // const data = this.CreateGroupContainer.state.dataUserCheck;
+  //   const data = dataUserCheck;
+  //   if (data && data.length > 0) {
+  //     data.map((e: itemDataCheck) => {
+  //       const id = e && e.item && e.item.id;
+  //       listIdUser.push(id);
+  //     });
+  //     // const nameGr = this.CreateGroupContainer.state.nameGr;
+  //     if (!nameGr) {
+  //       // this.CreateGroupContainer.setState({
+  //       //   emptyNameGr: true,
+  //       // });
+  //       setEmptyNameGr(true);
+  //       return;
+  //     }
+  //     const dataPost = {
+  //       title: nameGr,
+  //       members: listIdUser,
+  //     };
+  //     showLoading();
+  //     processRequestRespository(
+  //       CreateGroupServices.getInstance().onCreateGr(dataPost),
+  //       createGrSuccess
+  //     );
+  //   }
+  // }
 
   function onChangeText(txt: string) {
     if (txt) {
@@ -224,8 +217,8 @@ function CreateGroupAdapter(props: CreateGroupProps) {
     loading,
     txt,
     dataUserCheck,
-    emptyNameGr,
-    nameGr,
+    emptyNameGr, setEmptyNameGr,
+    nameGr, setNameGr,
     onRefresh,
     onEndReached,
     setTxtSearch,
@@ -234,7 +227,7 @@ function CreateGroupAdapter(props: CreateGroupProps) {
     setSateDataCheck,
     addToDataCheck,
     removeUserCheck,
-    onCreateGr,
+    // onCreateGr,
     onChangeText,
     // createGrSuccess,
   }
